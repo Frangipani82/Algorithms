@@ -1,3 +1,4 @@
+import copy
 class Heap:
     def __init__(self):
         self._X = []
@@ -34,7 +35,6 @@ class Heap:
             minChild = 2*i+2
         return(minChild)
 
-
     def extractMin(self):
         #Remove the minimum element from heap and return
         minElement=self._X.pop(0)
@@ -59,34 +59,97 @@ class Heap:
 
     def printHeap(self):
             print(self._X)
-       
+            
+             
     def recursiveSmaller(self, target):
           #If for getting the minimum element using the extractMin() function
           #the heap will be destroyed, so copy it, and return the elements from the
-          #copy. For this create an other heap and a list.
+          #copy. For this create another heap
           C = Heap()
-          list = []
-          #Remove the elements from the original heap and append them to
-          #the list
-          for i in range(self.size()):
-              list.append(self.extractMin())
-          #Copy the list
-          list2 = list[:]
-          #From the first list insert the elements to the copy heap
-          for l in list:
-               C.insert(l)
-          #From the second list insert the elements to the original heap
-          for l2 in list2:
-              self.insert(l2)
+          #Copy the heap
+          C = copy.deepcopy(self)
           #Base case: when there is at least one element in the minHeap and
           #the top element in the heap (the smallest) is smaller or equal to
           #the target, use copy heap
           if C.size() >= 1 and C.reportMin() <= target:
              #Remove the smallest element and print it
-             print(C.extractMin())
+             #print(C.extractMin())
              #Continue with the procedure until base case found
+             print(C.extractMin())
              return C.recursiveSmaller(target)
-        
+    
+             
+    # def recursiveSmaller(self, target):
+    #       #If for getting the minimum element using the extractMin() function
+    #       #the heap will be destroyed, so copy it, and return the elements from the
+    #       #copy. For this create an other heap and a list.
+    #       C = Heap()
+    #       list = []
+    #       #Remove the elements from the original heap and append them to
+    #       #the list
+    #       for i in range(self.size()):
+    #           list.append(self.extractMin())
+    #       #Copy the list
+    #       list2 = list[:]
+    #       #From the first list insert the elements to the copy heap
+    #       for l in list:
+    #            C.insert(l)
+    #       #From the second list insert the elements to the original heap
+    #       for l2 in list2:
+    #           self.insert(l2)
+    #       #Base case: when there is at least one element in the minHeap and
+    #       #the top element in the heap (the smallest) is smaller or equal to
+    #       #the target, use copy heap
+    #       if C.size() >= 1 and C.reportMin() <= target:
+    #          #Remove the smallest element and print it
+    #          print(C.extractMin())
+    #          #Continue with the procedure until base case found
+    #          return C.recursiveSmaller(target)
+    
+    def nonRecursiveSmaller(self,target):
+        #If for getting the minimum element using the extractMin() function
+        #the heap will be destroyed, so copy it, and return the elements from the
+        #copy. For this create another heap
+        C = Heap()
+        #Copy the heap
+        C = copy.deepcopy(self)
+        #While there is any element in the heap
+        while C.size():
+          #Check if the smallest element is smaller or equal to target
+          if C.reportMin() <= target:
+            #Remove the smallest element and print it
+            print(C.extractMin())
+          else:
+              break
+          
+    # def nonRecursiveSmaller(self,target):
+    #     #If for getting the minimum element using the extractMin() function
+    #     #the heap will be destroyed, so copy it, and return the elements from the
+    #     #copy. For this create an other heap and a list.
+    #     C = Heap()
+    #     list = []
+    #     #Remove the elements from the original heap and append them to
+    #     #the list
+    #     for i in range(self.size()):
+    #         list.append(self.extractMin())
+    #     #Copy the list
+    #     list2 = list[:]
+    #     #From the first list insert the elements to the copy heap
+    #     for l in list:
+    #           C.insert(l)
+    #     #From the second list insert the elements to the original heap
+    #     for l2 in list2:
+    #         self.insert(l2)
+    #     #While there is any element in the heap
+    #     while C.size():
+    #       #Check if the smallest element is smaller or equal to target
+    #       if C.reportMin() <= target:
+    #         #Remove the smallest element and print it
+    #         print(C.extractMin())
+    #       else:
+    #           break
+            
+    
     # def nonRecursiveSmaller(self,target):
     #     # If for getting the minimum element using the extractMin() function
     #     # the heap will be destroyed, so copy it, and return the elements from the
@@ -114,58 +177,28 @@ class Heap:
     #         print(C.extractMin())
     #       else:
     #           break
-            
-    def nonRecursiveSmaller(self,target):
-        #If for getting the minimum element using the extractMin() function
-        #the heap will be destroyed, so copy it, and return the elements from the
-        #copy. For this create an other heap and a list.
-        C = Heap()
-        list = []
-        #Remove the elements from the original heap and append them to
-        #the list
-        for i in range(self.size()):
-            list.append(self.extractMin())
-        #Copy the list
-        list2 = list[:]
-        #From the first list insert the elements to the copy heap
-        for l in list:
-              C.insert(l)
-        #From the second list insert the elements to the original heap
-        for l2 in list2:
-            self.insert(l2)
-        #While there is any element in the heap
-        while C.size():
-          #Check if the smallest element is smaller or equal to target
-          if C.reportMin() <= target:
-            #Remove the smallest element and print it
-            print(C.extractMin())
-          else:
-              break
-            
-    
 
 
 
-
-H=Heap()
-H.insert(12)
-H.insert(34)
-H.insert(2)
-H.insert(8)
-H.insert(3)
-H.insert(23)
-H.insert(11)
-H.insert(15)
-H.insert(43)
-H.insert(25)
-H.insert(55)
+# H=Heap()
+# H.insert(12)
+# H.insert(34)
+# H.insert(2)
+# H.insert(8)
+# H.insert(3)
+# H.insert(23)
+# H.insert(11)
+# H.insert(15)
+# H.insert(43)
+# H.insert(25)
+# H.insert(55)
 # H.insert(12)
 # H.insert(9)
 # H.insert(7)
 # H.insert(1)
 # H.insert(8)
 # H.insert(13)
-H.printHeap()
+#H.printHeap()
 # print(H.extractMin())
 # print(H.extractMin())
 # print(H.extractMin())
@@ -182,9 +215,10 @@ H.printHeap()
 #print(H.size())
 #H.printHeap()
 #H.copyRecursiveSmaller(35)
-#H.recursiveSmaller(45)
+#H.recursiveSmaller(15)
 #H.printHeap()
-H.nonRecursiveSmaller(45)
+#H.nonRecursiveSmaller(15)
 
-H.printHeap()
-
+#H.printHeap()
+list1 = [1, 2, 3]
+list2 = copy.deepcopy(list1)
