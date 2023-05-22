@@ -220,5 +220,4 @@ class Heap:
 #H.nonRecursiveSmaller(15)
 
 #H.printHeap()
-list1 = [1, 2, 3]
-list2 = copy.deepcopy(list1)
+
